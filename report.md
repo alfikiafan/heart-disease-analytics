@@ -1,7 +1,11 @@
 # Laporan Proyek Machine Learning
+
 ## Domain Proyek
+
 Proyek ini mengambil domain kesehatan dengan judul "Klasifikasi Risiko Penyakit Jantung dengan Machine Learning".
+
 ### Latar Belakang
+
 Penyakit jantung adalah salah satu masalah kesehatan global yang signifikan, menyebabkan jutaan kematian setiap tahunnya. Menurut World Health Organization (WHO), penyakit kardiovaskular, yang mencakup penyakit seperti penyakit jantung koroner, serangan jantung, dan stroke merupakan penyebab utama kematian di dunia, dengan estimasi jumlah kematian sebesar 17,9 juta orang di seluruh dunia pada tahun 2019 [[1](https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds))]. Di Indonesia, prevalensi penyakit jantung juga menunjukkan peningkatan yang signifikan seiring dengan perubahan gaya hidup dan peningkatan faktor risiko seperti hipertensi, diabetes, dan obesitas [[2](https://www.kemkes.go.id/id/profil-kesehatan-indonesia-2023)].
 
 Deteksi dini risiko penyakit jantung sangat penting untuk mencegah perkembangan penyakit lebih lanjut dan meningkatkan kualitas hidup pasien. Metode tradisional dalam diagnosis penyakit jantung seringkali memerlukan waktu dan sumber daya yang cukup besar, serta bergantung pada interpretasi subjektif dari tenaga medis. Oleh karena itu, penggunaan analitik prediktif berbasis machine learning menawarkan solusi yang lebih efisien dan objektif dalam mengidentifikasi pasien berisiko tinggi [[3](https://repository.bsi.ac.id/index.php/unduh/item/344564/01-Nugraha---Prediksi-Penyakit-Jantung-Cardiovascular-Menggunakan-Model-Algoritma-Klasifikasi.pdf)].
@@ -291,12 +295,12 @@ Outlier adalah nilai yang jauh berbeda dari mayoritas data dan dapat mempengaruh
 
 Z-Score digunakan untuk mengukur seberapa jauh sebuah nilai dari rata-rata dalam satuan deviasi standar. Rumus Z-Score adalah sebagai berikut:
 
-$$ z = \frac{(x - \mu)}{\sigma} $$
+$$z = \frac{(x - \mu)}{\sigma}$$
 
 di mana:
-- $ x $ = nilai individu
-- $ \mu $ = rata-rata dataset
-- $ \sigma $ = deviasi standar dataset
+- $x$ = nilai individu
+- $\mu$ = rata-rata dataset
+- $\sigma$ = deviasi standar dataset
 
 **Alasan Tidak Menghapus Outlier**
 
@@ -346,8 +350,6 @@ print("Feature scaling selesai dilakukan menggunakan StandardScaler.")
 ```
 
 ### 3. Feature Engineering
-
-#### Deskripsi
 
 Feature engineering adalah proses menciptakan fitur-fitur baru dari data yang sudah ada untuk meningkatkan kemampuan model dalam menangkap pola-pola kompleks dalam data.
 
@@ -526,7 +528,7 @@ grid_dt.fit(X_train, y_train)
 **Penjelasan parameter:**
 Berikut adalah penjelasan dari setiap parameter dalam kode tersebut:
 
-### **1. `param_grid_dt`**
+**a. `param_grid_dt`**  
    - **`max_depth`**: 
      - Menentukan kedalaman maksimum pohon keputusan.
      - **[None, 5, 10, 20, 30]**: 
@@ -543,7 +545,7 @@ Berikut adalah penjelasan dari setiap parameter dalam kode tersebut:
        - Nilai 1 berarti daun dapat memiliki satu sampel, memungkinkan pembagian mendetail.
        - Nilai lebih tinggi membantu mencegah daun terlalu kecil, meningkatkan generalisasi.
 
-### **2. `GridSearchCV`**
+**b. `GridSearchCV`**  
    - **`DecisionTreeClassifier(random_state=42)`**: 
      - Model Decision Tree yang akan dioptimasi.
      - **`random_state=42`**: Mengatur seed random untuk hasil yang dapat direproduksi.
@@ -555,7 +557,7 @@ Berikut adalah penjelasan dari setiap parameter dalam kode tersebut:
    - **`scoring='roc_auc'`**: 
      - Metrik evaluasi yang digunakan adalah **ROC-AUC** untuk mengukur kemampuan model dalam membedakan antara kelas positif dan negatif.
 
-### **3. `grid_dt.fit(X_train, y_train)`**
+**c. `grid_dt.fit(X_train, y_train)`**  
    - Proses pelatihan **GridSearchCV** pada data pelatihan (**X_train, y_train**).
    - Semua kombinasi parameter dari `param_grid_dt` diuji menggunakan 5-fold cross-validation.
    - Hasil akhir berupa model Decision Tree dengan kombinasi parameter terbaik berdasarkan metrik **ROC-AUC**.
@@ -565,7 +567,7 @@ Berikut adalah penjelasan dari setiap parameter dalam kode tersebut:
 
 **a. Accuracy (Akurasi)**  
 **Rumus:**  
-$$ \text{Accuracy} = \frac{\text{Jumlah Prediksi Benar}}{\text{Total Jumlah Prediksi}} $$
+$$\text{Accuracy} = \frac{\text{Jumlah Prediksi Benar}}{\text{Total Jumlah Prediksi}}$$
 
 Accuracy mengukur proporsi prediksi yang benar dari keseluruhan data yang diuji. Metrik ini memberikan gambaran umum tentang performa model, namun dapat menyesatkan jika dataset memiliki ketidakseimbangan kelas (imbalanced classes).
 
@@ -580,7 +582,7 @@ Accuracy mengukur proporsi prediksi yang benar dari keseluruhan data yang diuji.
 **b. Precision (Presisi)**
 
 **Rumus:**
-$$ \text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}} $$
+$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}$$
 
 Precision mengukur proporsi prediksi positif yang benar-benar positif. Metrik ini penting ketika biaya dari false positive tinggi, seperti dalam deteksi penyakit di mana diagnosis yang salah dapat menyebabkan kecemasan pasien dan biaya tambahan.
 
@@ -595,7 +597,7 @@ Precision mengukur proporsi prediksi positif yang benar-benar positif. Metrik in
 **c. Recall (Sensitivitas)**
 
 **Rumus:**
-$$ \text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}} $$
+$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$
 
 Recall mengukur proporsi aktual positif yang berhasil diprediksi oleh model. Metrik ini penting dalam konteks medis karena false negative dapat berarti pasien yang sebenarnya berisiko tidak terdeteksi, sehingga tidak mendapatkan perawatan yang diperlukan.
 
@@ -610,7 +612,7 @@ Recall mengukur proporsi aktual positif yang berhasil diprediksi oleh model. Met
 **d. F1-Score**
 
 #### **Rumus:**
-$$ \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} $$
+$$\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
 
 F1-Score adalah harmonic mean dari precision dan recall, memberikan keseimbangan antara kedua metrik tersebut. Metrik ini berguna ketika terdapat kebutuhan untuk menyeimbangkan antara precision dan recall, terutama pada dataset dengan distribusi kelas yang tidak seimbang.
 
