@@ -14,24 +14,6 @@ Meskipun metode lain seperti **Convolutional Neural Networks (CNNs)** telah dite
 
 Untuk mengatasi masalah ini, proyek ini bertujuan untuk membangun model klasifikasi yang akurat dan mudah diinterpretasikan untuk mengidentifikasi pasien berisiko tinggi penyakit jantung. Dengan menggunakan dataset yang terdiri dari berbagai fitur kesehatan dan demografis, proyek ini akan menerapkan algoritma **Logistic Regression** sebagai model baseline dan **Decision Tree** untuk interpretasi visual. Selain itu, proses **hyperparameter tuning** akan dilakukan untuk meningkatkan performa model. Meskipun demikian, analisis lanjutan oleh dokter tetap perlu dilakukan untuk mengonfirmasi diagnosis awal dan rekomendasi pengobatan yang sesuai.
 
-### Referensi
-
-1. World Health Organization. (2021). **Cardiovascular Diseases (CVDs)**. Diakses dari [https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)](https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds))
-
-2. Kementerian Kesehatan Republik Indonesia. (2023). **Profil Kesehatan Indonesia 2023**. Jakarta: Kemenkes RI.
-
-3. Nugraha, A., 2020. **Prediksi Penyakit Jantung Cardiovascular Menggunakan Model Algoritma Klasifikasi**. Repository Universitas Bina Sarana Informatika.
-
-4. Hariyono, Putra Pratama. (2021). **Penerapan Machine Learning Untuk Prediksi Penyakit Jantung Menggunakan Metode Naïve Bayes Dan Decision Tree**. Universitas Airlangga Repository.
-
-5. Bukhari, F., et al. (2023). **Deteksi Penyakit Jantung Menggunakan Metode Klasifikasi Decision Tree dan Regresi Logistik**. Jurnal SAKTI, 5(1), 41-49. 
-
-6. Alhamad, A., et al. (2019). **Prediksi Penyakit Jantung Menggunakan Metode-Metode Machine Learning Berbasis Ensemble - Weighted Vote**. Jurnal Edukasi dan Penelitian Informatika, 5(3), 233-240. 
-
-7. Pedregosa, F., et al. (2011). **Scikit-learn: Machine Learning in Python**. Journal of Machine Learning Research, 12, 2825-2830.
-
-8. Zhang, Y., & Wallace, B. C. (2017). **A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification**. In Proceedings of the Eighth International Joint Conference on Natural Language Processing (Volume 1: Long Papers) (pp. 253-263).
-
 ## Business Understanding
 
 Dalam proyek ini, penulis mengklasifikasikan risiko penyakit jantung menjadi dua kategori: **berisiko (1)** dan **tidak berisiko (0)**.
@@ -300,13 +282,9 @@ dtype: int64
 ```
 
 **Hasil:**
-- Tidak terdapat nilai yang hilang dalam dataset.
+- Tidak terdapat nilai yang hilang dalam dataset.  
 
-## Data Preparation
-
-Pada tahap ini, data yang telah dipahami sebelumnya akan dipersiapkan agar siap digunakan dalam proses pemodelan machine learning. Proses persiapan data meliputi encoding fitur kategorikal, feature scaling, dan feature engineering. Setiap langkah dilakukan dengan alasan yang jelas untuk memastikan kualitas data yang optimal dan meningkatkan performa model yang akan dibangun.
-
-### 1. Outlier
+### 7. Outlier
 Outlier adalah nilai yang jauh berbeda dari mayoritas data dan dapat mempengaruhi hasil analisis serta performa model machine learning. Untuk memastikan kualitas data yang optimal, penghapusan outlier biasanya dipertimbangkan. Namun, dalam analisis ini, penghapusan outlier menggunakan metode Z-Score dievaluasi tetapi diputuskan untuk tidak dilakukan karena tidak meningkatkan performa model.
 
 **Rumus Z-Score**
@@ -322,11 +300,15 @@ di mana:
 
 **Alasan Tidak Menghapus Outlier**
 
-- **Pengaruh Negatif pada Performasi Model:** Setelah melakukan analisis, ditemukan bahwa penghapusan outlier tidak memberikan peningkatan performa model. Sebaliknya, model menunjukkan hasil yang lebih baik tanpa menghapus outlier, mungkin karena outlier tersebut merepresentasikan kasus-kasus penting yang berkontribusi pada pemahaman risiko penyakit jantung.  
+- Setelah melakukan analisis, ditemukan bahwa penghapusan outlier tidak memberikan peningkatan performa model. Sebaliknya, model menunjukkan hasil yang lebih baik tanpa menghapus outlier, mungkin karena outlier tersebut merepresentasikan kasus-kasus penting yang berkontribusi pada pemahaman risiko penyakit jantung.  
 
-- **Representasi Data yang Lebih Akurat:** Menghapus outlier dapat menyebabkan hilangnya informasi penting yang sebenarnya relevan dalam konteks medis, seperti pasien dengan kondisi ekstrem yang memerlukan perhatian khusus.  
+- Menghapus outlier dapat menyebabkan hilangnya informasi penting yang sebenarnya relevan dalam konteks medis, seperti pasien dengan kondisi ekstrem yang memerlukan perhatian khusus. 
 
-### 2. Encoding Fitur Kategorikal
+## Data Preparation
+
+Pada tahap ini, data yang telah dipahami sebelumnya akan dipersiapkan agar siap digunakan dalam proses pemodelan machine learning. Proses persiapan data meliputi encoding fitur kategorikal, feature scaling, dan feature engineering. Setiap langkah dilakukan dengan alasan yang jelas untuk memastikan kualitas data yang optimal dan meningkatkan performa model yang akan dibangun. 
+
+### 1. Encoding Fitur Kategorikal
 
 Fitur kategorikal seperti `chest pain type`, `resting ecg`, dan `ST slope` perlu diubah menjadi format numerik agar dapat diproses oleh algoritma machine learning. Salah satu metode yang umum digunakan adalah **One-Hot Encoding**.
 
@@ -344,7 +326,7 @@ data = pd.get_dummies(data, columns=categorical_features, drop_first=True)
 print(f"Jumlah fitur setelah One-Hot Encoding: {data.shape[1]}")
 ```
 
-### 3. Feature Scaling
+### 2. Feature Scaling
 
 Feature scaling adalah proses menyesuaikan skala fitur numerik sehingga setiap fitur memiliki kontribusi yang seimbang dalam proses pemodelan. **StandardScaler** adalah salah satu metode yang umum digunakan untuk melakukan feature scaling dengan mengubah data sehingga memiliki mean 0 dan standard deviation 1.
 
@@ -363,7 +345,7 @@ data[numerical_features] = scaler.fit_transform(data[numerical_features])
 print("Feature scaling selesai dilakukan menggunakan StandardScaler.")
 ```
 
-### 4. Feature Engineering
+### 3. Feature Engineering
 
 #### Deskripsi
 
@@ -384,6 +366,22 @@ data_encoded['age_cholesterol'] = data_encoded['age'] * data_encoded['cholestero
 **Hasil**
 
 Dengan menambahkan fitur interaksi `age_cholesterol`, model diharapkan dapat menangkap hubungan kompleks antara umur pasien dan kadar kolesterol mereka, yang dapat berpengaruh signifikan terhadap risiko penyakit jantung.
+
+
+### 4. Membagi Dataset menjadi Data Training dan Testing
+
+Dataset yang telah dipersiapkan dibagi menjadi dua subset: data training dan data testing dengan proporsi 80:20. Pembagian ini dilakukan untuk melatih model pada data yang besar dan menguji performa model pada data yang belum pernah dilihat sebelumnya.
+
+```python
+from sklearn.model_selection import train_test_split
+
+X = data.drop('target', axis=1)
+y = data['target']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+```
+
+Pembagian ini memastikan bahwa model dapat belajar dari data yang representatif dan dievaluasi secara objektif pada data yang berbeda.
 
 ## Modeling
 
@@ -415,24 +413,7 @@ Pada tahap ini, model machine learning dibangun dan dilatih untuk mengklasifikas
    - Rentan terhadap overfitting, terutama pada pohon yang dalam.
    - Kurang stabil karena perubahan kecil pada data dapat menghasilkan pohon yang berbeda.
 
-### Proses Pemodelan
-
-#### 1. Membagi Dataset menjadi Data Training dan Testing
-
-Dataset yang telah dipersiapkan dibagi menjadi dua subset: data training dan data testing dengan proporsi 80:20. Pembagian ini dilakukan untuk melatih model pada data yang besar dan menguji performa model pada data yang belum pernah dilihat sebelumnya.
-
-```python
-from sklearn.model_selection import train_test_split
-
-X = data.drop('target', axis=1)
-y = data['target']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-```
-
-Pembagian ini memastikan bahwa model dapat belajar dari data yang representatif dan dievaluasi secara objektif pada data yang berbeda.
-
-#### 2. Melatih Model Logistic Regression
+### Melatih Model Logistic Regression
 
 Model Logistic Regression diinisialisasi dan dilatih menggunakan data training.
 Parameter yang digunakan adalah `max_iter=1000` dan `random_state=42`. Ini memastikan bahwa model dilatih hingga konvergensi dan hasilnya dapat direproduksi.
@@ -450,7 +431,7 @@ log_reg.fit(X_train, y_train)
 
 Logistic Regression dipilih karena kemampuannya dalam memberikan interpretasi koefisien yang jelas dan efisiensi dalam pelatihan.  
 
-#### 3. Melatih Model Decision Tree
+### Melatih Model Decision Tree
 
 Model Decision Tree diinisialisasi dan dilatih menggunakan data training.
 Parameter yang digunakan adalah `random_state=42` untuk memastikan hasil yang konsisten.
@@ -504,7 +485,26 @@ grid_log_reg = GridSearchCV(LogisticRegression(max_iter=1000, random_state=42), 
 grid_log_reg.fit(X_train, y_train)
 ```
 
-Optimasi hyperparameter membantu dalam menemukan kombinasi parameter terbaik yang meningkatkan akurasi dan metrik evaluasi lainnya.
+**Penjelasan parameter:**
+**a. `param_grid_lr`**  
+   - **`C`**: Parameter regularisasi dalam Logistic Regression yang mengontrol kekuatan regularisasi. Nilai yang lebih kecil menunjukkan regularisasi lebih kuat, sedangkan nilai yang lebih besar menunjukkan regularisasi lebih lemah.
+      - **[0.01, 0.1, 1, 10, 100]**: Berbagai nilai regularisasi yang akan diuji.
+   - **`solver`**: Algoritma yang digunakan untuk optimisasi Logistic Regression.
+      - **`liblinear`**: Solver untuk dataset kecil atau sparsitas tinggi, menggunakan metode coordinate descent.
+      - **`lbfgs`**: Solver berbasis metode optimasi quasi-Newton, lebih cocok untuk dataset dengan banyak fitur.
+
+**b. `GridSearchCV`**  
+   - **`LogisticRegression(max_iter=1000, random_state=42)`**: Model Logistic Regression yang akan dioptimasi.
+      - **`max_iter=1000`**: Menentukan jumlah iterasi maksimum sebesar 1000 selama proses optimasi.
+      - **`random_state=42`**: Untuk memastikan hasil yang konsisten dan dapat direproduksi.
+   - **`param_grid_lr`**: Grid parameter yang didefinisikan di atas, yaitu `C` dan `solver`, untuk mencoba semua kombinasi parameter yang memungkinkan.
+   - **`cv=5`**: Cross-validation dengan **5 folds**. Dataset dibagi menjadi 5 bagian, di mana 4 bagian digunakan untuk pelatihan dan 1 bagian untuk validasi, dilakukan secara bergantian.
+   - **`scoring='roc_auc'`**: Metrik evaluasi yang digunakan adalah **ROC-AUC**, untuk mengukur kemampuan model dalam membedakan antara kelas positif dan negatif.
+
+**c. `grid_log_reg.fit(X_train, y_train)`**  
+   - Proses pelatihan GridSearchCV pada data pelatihan (**X_train, y_train**).
+   - Model akan mencoba setiap kombinasi parameter dari `param_grid_lr` dengan 5-fold cross-validation.
+   - Hasil akhir berupa model Logistic Regression dengan kombinasi parameter terbaik berdasarkan metrik **ROC-AUC**.
 
 **2. Hyperparameter Tuning untuk Decision Tree**
 
@@ -523,7 +523,42 @@ grid_dt = GridSearchCV(DecisionTreeClassifier(random_state=42), param_grid_dt, c
 grid_dt.fit(X_train, y_train)
 ```
 
-Decision Tree sangat rentan terhadap overfitting, sehingga optimasi hyperparameter seperti `max_depth`, `min_samples_split`, dan `min_samples_leaf` sangat penting untuk meningkatkan generalisasi model.
+**Penjelasan parameter:**
+Berikut adalah penjelasan dari setiap parameter dalam kode tersebut:
+
+### **1. `param_grid_dt`**
+   - **`max_depth`**: 
+     - Menentukan kedalaman maksimum pohon keputusan.
+     - **[None, 5, 10, 20, 30]**: 
+       - `None` berarti pohon dapat berkembang hingga semua daun hanya memiliki satu sampel atau mencapai kedalaman maksimum tanpa batas.
+       - Nilai angka seperti 5, 10, 20, 30 membatasi kedalaman pohon untuk mencegah overfitting.
+   - **`min_samples_split`**: 
+     - Jumlah minimum sampel yang diperlukan untuk membagi sebuah node.
+     - **[2, 5, 10]**:
+       - Nilai lebih kecil memungkinkan pembagian lebih sering (berpotensi overfitting).
+       - Nilai lebih besar mengurangi pembagian, meningkatkan generalisasi.
+   - **`min_samples_leaf`**: 
+     - Jumlah minimum sampel yang diperlukan dalam satu daun (leaf node).
+     - **[1, 2, 4]**:
+       - Nilai 1 berarti daun dapat memiliki satu sampel, memungkinkan pembagian mendetail.
+       - Nilai lebih tinggi membantu mencegah daun terlalu kecil, meningkatkan generalisasi.
+
+### **2. `GridSearchCV`**
+   - **`DecisionTreeClassifier(random_state=42)`**: 
+     - Model Decision Tree yang akan dioptimasi.
+     - **`random_state=42`**: Mengatur seed random untuk hasil yang dapat direproduksi.
+   - **`param_grid_dt`**: 
+     - Grid parameter yang didefinisikan di atas, yaitu kombinasi dari `max_depth`, `min_samples_split`, dan `min_samples_leaf`, untuk mencoba setiap kombinasi yang memungkinkan.
+   - **`cv=5`**:
+     - Cross-validation dengan **5 folds**.
+     - Dataset dibagi menjadi 5 bagian; pada setiap iterasi, 4 bagian digunakan untuk pelatihan dan 1 bagian untuk validasi, dilakukan secara bergantian.
+   - **`scoring='roc_auc'`**: 
+     - Metrik evaluasi yang digunakan adalah **ROC-AUC** untuk mengukur kemampuan model dalam membedakan antara kelas positif dan negatif.
+
+### **3. `grid_dt.fit(X_train, y_train)`**
+   - Proses pelatihan **GridSearchCV** pada data pelatihan (**X_train, y_train**).
+   - Semua kombinasi parameter dari `param_grid_dt` diuji menggunakan 5-fold cross-validation.
+   - Hasil akhir berupa model Decision Tree dengan kombinasi parameter terbaik berdasarkan metrik **ROC-AUC**.
 
 ## Evaluasi
 ### 1. Metrik
@@ -940,7 +975,11 @@ Proyek ini berhasil mengembangkan model machine learning yang efektif untuk meng
 
 Dalam tahap evaluasi, **Logistic Regression** menunjukkan performa yang lebih unggul dengan akurasi sebesar **85%** dan skor **ROC-AUC** sebesar **0.93**, dibandingkan dengan **Decision Tree** yang mencapai akurasi **82%** dan ROC-AUC **0.83**. Hasil ini menunjukkan bahwa Logistic Regression tidak hanya unggul dalam hal akurasi tetapi juga memberikan keseimbangan yang baik antara precision dan recall, yang sangat penting dalam konteks medis untuk memastikan deteksi risiko penyakit jantung yang akurat dan mengurangi kesalahan diagnosis. Meskipun optimasi hyperparameter melalui **Grid Search** dengan cross-validation berhasil meningkatkan performa **Decision Tree** hingga ROC-AUC sebesar **0.88**, **Logistic Regression** tetap mempertahankan performa terbaiknya setelah tuning, menunjukkan bahwa model ini berada pada konfigurasi optimal yang mampu memberikan performa stabil.
 
-Meskipun hasil yang diperoleh cukup menjanjikan, terdapat beberapa keterbatasan yang perlu diperhatikan. Pertama, ukuran dataset yang digunakan masih terbatas, dan pengumpulan data yang lebih luas serta beragam dapat lebih meningkatkan akurasi dan generalisasi model. Kedua, proyek ini menggunakan 12 fitur yang tersedia; penambahan fitur-fitur lain yang relevan dapat memberikan wawasan lebih mendalam dan meningkatkan kemampuan prediktif model.
+Proyek ini secara efektif menjawab semua problem statements yang diajukan. Pertama, model berhasil mengklasifikasikan pasien sebagai berisiko atau tidak berisiko penyakit jantung berdasarkan data kesehatan dan demografis yang tersedia. Kedua, melalui evaluasi yang komprehensif, proyek ini mengidentifikasi bahwa **Logistic Regression** adalah algoritma yang paling efektif dibandingkan **Decision Tree** dalam konteks dataset ini. Ketiga, peningkatan akurasi model dicapai melalui optimasi parameter dan teknik pemodelan lanjutan. Hal ini memastikan bahwa model dapat memberikan prediksi yang lebih akurat. Keempat, model yang dibangun tidak hanya akurat tetapi juga interpretatif,dapat mendukung pengambilan keputusan medis yang lebih baik dengan memberikan wawasan tentang kontribusi masing-masing fitur terhadap risiko penyakit jantung.
+
+Dengan memilih algoritma yang tepat dan melakukan optimasi yang diperlukan, proyek ini mencapai tujuan utamanya yaitu membangun model klasifikasi yang akurat dan dapat diandalkan. **Logistic Regression** yang dipilih sebagai model terbaik memberikan interpretabilitas yang tinggi, memungkinkan tenaga medis untuk memahami faktor-faktor yang berkontribusi terhadap risiko penyakit jantung secara lebih mendalam. Hal ini tidak hanya meningkatkan efisiensi deteksi dini tetapi juga memperkuat kepercayaan dalam penggunaan model sebagai alat bantu dalam diagnosis medis.
+
+Secara keseluruhan, proyek ini berhasil mencapai semua goals yang diharapkan. Model yang dikembangkan tidak hanya memenuhi standar akurasi dan performa tetapi juga memberikan manfaat praktis dalam konteks klinis. Dengan implementasi model ini ke dalam sistem pendukung keputusan medis, diharapkan dapat meningkatkan kualitas hidup pasien melalui deteksi dini risiko penyakit jantung dan intervensi yang lebih tepat waktu. Meskipun terdapat beberapa keterbatasan, seperti ukuran dataset dan jumlah fitur yang digunakan, hasil yang diperoleh membuka peluang untuk penelitian lebih lanjut dan pengembangan aplikasi praktis yang dapat meningkatkan kualitas layanan kesehatan.
 
 ### Saran
 
@@ -949,3 +988,21 @@ Untuk penelitian selanjutnya, disarankan untuk:
 2. Menguji algoritma machine learning lainnya seperti **Random Forest**, **Support Vector Machine (SVM)**, atau **Gradient Boosting** untuk membandingkan performa dan menemukan model yang lebih optimal.
 3. Mengidentifikasi dan menciptakan fitur-fitur baru yang dapat meningkatkan kemampuan model dalam mendeteksi risiko penyakit jantung.
 4. Mengimplementasikan model ke dalam sistem klinis nyata dan melakukan uji coba untuk menilai efektivitasnya dalam lingkungan operasional.
+
+## Referensi
+
+1. World Health Organization. (2021). **Cardiovascular Diseases (CVDs)**. Diakses dari [https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)](https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds))
+
+2. Kementerian Kesehatan Republik Indonesia. (2023). **Profil Kesehatan Indonesia 2023**. Jakarta: Kemenkes RI.
+
+3. Nugraha, A., 2020. **Prediksi Penyakit Jantung Cardiovascular Menggunakan Model Algoritma Klasifikasi**. Repository Universitas Bina Sarana Informatika.
+
+4. Hariyono, Putra Pratama. (2021). **Penerapan Machine Learning Untuk Prediksi Penyakit Jantung Menggunakan Metode Naïve Bayes Dan Decision Tree**. Universitas Airlangga Repository.
+
+5. Bukhari, F., et al. (2023). **Deteksi Penyakit Jantung Menggunakan Metode Klasifikasi Decision Tree dan Regresi Logistik**. Jurnal SAKTI, 5(1), 41-49. 
+
+6. Alhamad, A., et al. (2019). **Prediksi Penyakit Jantung Menggunakan Metode-Metode Machine Learning Berbasis Ensemble - Weighted Vote**. Jurnal Edukasi dan Penelitian Informatika, 5(3), 233-240. 
+
+7. Pedregosa, F., et al. (2011). **Scikit-learn: Machine Learning in Python**. Journal of Machine Learning Research, 12, 2825-2830.
+
+8. Zhang, Y., & Wallace, B. C. (2017). **A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification**. In Proceedings of the Eighth International Joint Conference on Natural Language Processing (Volume 1: Long Papers) (pp. 253-263).
