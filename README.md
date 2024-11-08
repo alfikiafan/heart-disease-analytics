@@ -1,6 +1,10 @@
 # Prediksi Risiko Penyakit Jantung
 
-Proyek ini bertujuan untuk menganalisis dan mengklasifikasikan risiko penyakit jantung menggunakan beberapa algoritma machine learning. Dengan menggunakan dataset yang terdiri dari 1190 sampel dan 12 fitur yang mencakup informasi demografis serta kesehatan pasien, proyek ini berfokus pada pengklasifikasian pasien sebagai Berisiko Tinggi atau Tidak Berisiko terhadap penyakit jantung. Model yang digunakan meliputi Logistic Regression dan Decision Tree, dengan evaluasi performa menggunakan berbagai metrik seperti akurasi, precision, recall, F1-score, dan ROC-AUC.
+Dataset: **🫀 Heart Disease Dataset** ([Kaggle](https://www.kaggle.com/datasets/mexwell/heart-disease-dataset))
+
+Proyek ini bertujuan untuk menganalisis dan mengklasifikasikan risiko penyakit jantung menggunakan beberapa algoritma machine learning. Proyek ini berfokus pada pengklasifikasian pasien sebagai Berisiko Tinggi atau Tidak Berisiko terhadap penyakit jantung. Model yang digunakan meliputi Logistic Regression dan Decision Tree, dengan evaluasi performa menggunakan berbagai metrik seperti akurasi, precision, recall, F1-score, dan ROC-AUC.
+
+**Untuk laporan lengkap, silakan baca dokumen [Laporan Proyek](report.md).**
 
 ## Daftar Isi
 
@@ -25,7 +29,6 @@ Proyek ini bertujuan untuk menganalisis dan mengklasifikasikan risiko penyakit j
   - [Evaluasi Lanjutan](#evaluasi-lanjutan)
   - [Menyimpan dan Memuat Model Terbaik](#menyimpan-dan-memuat-model-terbaik)
 - [Visualisasi Hasil](#visualisasi-hasil)
-  - [Perbandingan Metrik Model](#perbandingan-metrik-model)
   - [ROC Curves untuk Semua Model](#roc-curves-untuk-semua-model)
   - [Confusion Matrix untuk Semua Model](#confusion-matrix-untuk-semua-model)
   - [Feature Importance (Decision Tree)](#feature-importance-decision-tree)
@@ -58,6 +61,22 @@ Bagaimana memprediksi risiko penyakit jantung pada pasien berdasarkan data keseh
 ## Alur Kode
 
 ### 1. Data Understanding
+
+#### Deskripsi Dataset
+| No. | Attribute Code | Deskripsi                                                                                                 | Tipe Data | Unit       |
+|-------|----------------|-----------------------------------------------------------------------------------------------------------|-----------|------------|
+| 1     | age            | Umur pasien dalam tahun                                                                                   | Numeric   | Tahun      |
+| 2     | sex            | Jenis kelamin pasien (1 = pria, 0 = wanita)                                                              | Binary    | -          |
+| 3     | chest pain type | Tipe nyeri dada (1: typical angina, 2: atypical angina, 3: non-anginal pain, 4: asymptomatic)          | Nominal   | -          |
+| 4     | resting bp s   | Tekanan darah istirahat dalam mm Hg                                                                        | Numeric   | mm Hg      |
+| 5     | cholesterol    | Kadar kolesterol serum dalam mg/dl                                                                           | Numeric   | mg/dl      |
+| 6     | fasting blood sugar | Apakah gula darah puasa > 120 mg/dl (1 = ya, 0 = tidak)                                            | Binary    | mg/dl      |
+| 7     | resting ecg    | Hasil elektrokardiogram istirahat (0: normal, 1: ST-T wave abnormality, 2: probable atau definite LVH) | Nominal   | -          |
+| 8     | max heart rate | Denyut jantung maksimum yang dicapai                                                                         | Numeric   | bpm        |
+| 9     | exercise angina | Angina yang diinduksi oleh latihan (1 = ya, 0 = tidak)                                                  | Binary    | -          |
+| 10    | oldpeak        | Depresi ST setelah latihan                                                                                 | Numeric   | -          |
+| 11    | ST slope       | Kemiringan segmen ST pada latihan (1: upsloping, 2: flat, 3: downsloping)                                | Nominal   | -          |
+| 12    | class          | Status penyakit jantung (1 = penyakit jantung, 0 = normal)                                               | Binary    | -          |
 
 #### Exploratory Data Analysis (EDA)
 
@@ -134,7 +153,7 @@ Pastikan Anda telah menginstal Python 3.7 atau yang lebih baru. Instalasi dapat 
 
 1. **Clone Repository:**
    ```bash
-   git clone https://github.com/username/heart-disease-prediction.git
+   git clone https://github.com/alfikiafan/heart-disease-prediction.git
    cd heart-disease-prediction
    ```
 
@@ -145,9 +164,6 @@ Pastikan Anda telah menginstal Python 3.7 atau yang lebih baru. Instalasi dapat 
    ```
 
 3. **Instal Dependensi:**
-   ```bash
-   pip install -r requirements.txt
-   ```
 
 ## Cara Penggunaan
 
@@ -155,7 +171,7 @@ Pastikan Anda telah menginstal Python 3.7 atau yang lebih baru. Instalasi dapat 
    Pastikan file dataset `heart_disease_dataset.csv` berada di direktori proyek.
 
 2. **Jalankan Script:**  
-   Anda dapat menjalankan script analisis menggunakan Jupyter Notebook atau langsung melalui Python.  
+   Anda dapat menjalankan script analisis menggunakan Jupyter Notebook, Google Colaboratory, atau langsung melalui Python.  
    Jika menggunakan Jupyter Notebook:
      ```bash
      jupyter notebook
