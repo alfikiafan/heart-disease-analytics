@@ -73,7 +73,7 @@ Bagaimana memprediksi risiko penyakit jantung pada pasien berdasarkan data keseh
 | 6     | fasting blood sugar | Apakah gula darah puasa > 120 mg/dl (1 = ya, 0 = tidak)                                            | Binary    | mg/dl      |
 | 7     | resting ecg    | Hasil elektrokardiogram istirahat (0: normal, 1: ST-T wave abnormality, 2: probable atau definite LVH) | Nominal   | -          |
 | 8     | max heart rate | Denyut jantung maksimum yang dicapai                                                                         | Numeric   | bpm        |
-| 9     | exercise angina | Apakah angin muncul saat berolahraga? (1 = ya, 0 = tidak)                                                  | Binary    | -          |
+| 9     | exercise angina | Apakah angina muncul saat berolahraga? (1 = ya, 0 = tidak)                                                  | Binary    | -          |
 | 10    | oldpeak        | Depresi ST setelah latihan                                                                                 | Numeric   | -          |
 | 11    | ST slope       | Kemiringan segmen ST pada latihan (1: upsloping, 2: flat, 3: downsloping)                                | Nominal   | -          |
 | 12    | class          | Status penyakit jantung (1 = penyakit jantung, 0 = normal)                                               | Binary    | -          |
