@@ -274,7 +274,7 @@ sex                 0
 chest pain type     0
 resting bp s        0
 cholesterol         0
-fasting blood sugar	0
+fasting blood sugar 0
 resting ecg         0
 max heart rate      0
 exercise angina     0
